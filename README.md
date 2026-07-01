@@ -13,7 +13,7 @@
 5. [Build and Run Instructions](#5-build-and-run-instructions)
 6. [User Survey Summary](#6-user-survey-summary)
 7. [Sample Program & Output](#7-sample-program--output)
-8. [Project Demo Video](#9-project-demo-video)
+8. [Project Demo Video](#8-project-demo-video)
 
 ---
 
@@ -300,4 +300,4 @@ class MyCipher:
 
 A video walkthrough of CryptoScript is available as part of the course presentation. It covers the motivation, DSL syntax, the cipher-block auto-inversion feature, and a live demo of compiling and running a cipher program.
 
-**[Link to be added]**
+**(https://drive.google.com/file/d/1oUk-zpSCgkrethqrpm2YjQ_HRNxmznGz/view?usp=sharing)**
