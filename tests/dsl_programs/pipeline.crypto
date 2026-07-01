@@ -1,0 +1,18 @@
+raw: Bytes = b"\xDE\xAD\xBE\xEF"
+
+# bytes -> hex -> back to bytes
+as_hex = raw |> to_hex()
+as_bytes = as_hex |> to_bytes()
+print(as_bytes) # b"\xde\xad\xbe\xef"
+
+# bytes -> int -> to hex
+as_hex = raw |> to_int() |> to_hex()
+print(as_hex) # 0xdeadbeef
+
+# String round trip
+msg: Bytes = b"hello"
+as_str = msg |> to_string()
+print(as_str) # hello
+
+back: Bytes = as_str |> to_bytes()
+print(back) # b"hello"

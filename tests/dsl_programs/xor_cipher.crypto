@@ -1,0 +1,12 @@
+cipher XorCipher(key: Bytes) -> Bytes:
+    encrypt:
+        data |> xor(key)
+
+mycipher = XorCipher(b"\xAB\xCD\xEF\x01")
+plaintext = b"\x00\x01\x02\x03\x04\x05\x06\x07"
+
+encrypted = mycipher.encrypt(plaintext)
+print(encrypted) # b"\xab\xcc\xed\x02\xaf\xc8\xe9\x06"
+
+decrypted = mycipher.decrypt(encrypted)
+print(decrypted) # b"\x00\x01\x02\x03\x04\x05\x06\x07"

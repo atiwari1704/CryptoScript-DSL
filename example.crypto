@@ -1,0 +1,17 @@
+sbox s = [1, 0, 3, 2, 5, 4, 7, 6]
+
+cipher MyCipher(key: Bytes, iv: Bytes) -> Bytes:
+    encrypt:
+        data |> pad(PKCS7) |> xor(iv) |> repeat(3):
+            xor(key) |> substitute(s)
+        |> xor(key)
+
+mycipher = MyCipher(b"\xAA", b"\x55")
+plaintext = b"\x00\x01\x02\x03"
+
+encrypted = mycipher.encrypt(plaintext)
+decrypted = mycipher.decrypt(encrypted)
+
+print("Plaintext :", plaintext)
+print("Encrypted :", encrypted)
+print("Decrypted :", decrypted)

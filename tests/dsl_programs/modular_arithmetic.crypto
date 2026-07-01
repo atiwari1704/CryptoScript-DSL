@@ -1,0 +1,14 @@
+n: ModInt[17] = 5
+m: ModInt[17] = 6
+
+# Multiplication stays in field
+product: ModInt[17] = n * m
+print(product)  # (5 * 6) mod 17 = 30 mod 17 = 13
+
+# Exponentiation stays in field
+powered: ModInt[17] = n ** 3
+print(powered)  # (5^3) mod 17 = 125 mod 17 = 6
+
+# Addition wraps around
+total: ModInt[17] = n + m
+print(total)   # (5 + 6) mod 17 = 11

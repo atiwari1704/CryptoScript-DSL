@@ -1,0 +1,20 @@
+x: Int = 0x000000FF
+
+# Rotate left by 4 in 32-bit field
+left = rotl(x, 4, 32) |> to_hex()
+print(left) # 0xFF0
+
+# Rotate right by 4 in 32-bit field
+right = rotr(left, 4, 32) |> to_hex()
+print(right) #0xFF
+
+# Round trip
+original: Int = 0xDEADBEEF
+rotated = rotl(original, 8, 32)
+restored = rotr(rotated, 8, 32) |> to_hex()
+print(restored) # 0xdeadbeef
+
+# Rotate bytes
+data: Bytes = b"\xFF\x00\x00\x00"
+rotated_bytes = rotl(data, 8, 32)
+print(rotated_bytes) # b"\x00\x00\x00\xff"

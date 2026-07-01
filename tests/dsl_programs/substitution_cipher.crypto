@@ -1,0 +1,14 @@
+sbox forward = [1, 0, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12, 15, 14]
+
+cipher SubCipher(key: Bytes) -> Bytes:
+    encrypt:
+        data |> substitute(forward) |> pad(PKCS7)
+
+mycipher = SubCipher(b"\x00")
+plaintext = b"\x00\x01\x02\x03"
+
+encrypted = mycipher.encrypt(plaintext)
+print(encrypted) # b'\x01\x00\x03\x02\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c'
+
+decrypted = mycipher.decrypt(encrypted)
+print(decrypted) # b"\x00\x01\x02\x03"

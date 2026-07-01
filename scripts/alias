@@ -1,0 +1,2 @@
+alias run="python $(dirname "$BASH_SOURCE")/main.py run"
+alias compile="python $(dirname "$BASH_SOURCE")/main.py compile"

@@ -1,0 +1,33 @@
+sbox s = [1, 0, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12, 15, 14]
+
+pbox p = [1, 0, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12, 15, 14]
+
+# Function to derive a key
+def derive_key(base: Bytes, round_num: Int) -> Bytes:
+    n: ModInt[251] = round_num + 1
+    offset: Int = n * 7
+    return base |> xor(to_bytes(offset, 1))
+
+cipher FullCipher(key: Bytes, iv: Bytes) -> Bytes:
+    encrypt:
+        data |> pad(PKCS7) |> xor(iv) |> repeat(4):
+            substitute(s) |> permute(p) |> xor(key)
+        |> xor(iv)
+
+key = b"\x2B\x7E\x15\x16\x28\xAE\xD2\xA6\xAB\xF7\x15\x88\x09\xCF\x4F\x3C"
+iv  = b"\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
+
+mycipher = FullCipher(key, iv)
+
+plaintexts = [b"\x00\x00\x00\x00", b"\xFF\xFF\xFF\xFF", b"\xDE\xAD\xBE\xEF", b"\x01\x23\x45\x67",]
+
+for pt in plaintexts:
+    enc = mycipher.encrypt(pt)
+    dec = mycipher.decrypt(enc)
+    print(dec)
+
+enc = mycipher.encrypt(b"\x00\x00\x00\x00")
+print(enc) # b"\x01\x01\x00\x00\r\r\r\r\r\r\r\r\x0c\x0c\r\r"
+
+dec = mycipher.decrypt(enc)
+print(dec) # b"\x00\x00\x00\x00"

@@ -1,0 +1,16 @@
+p : Int = 66543592972116008645028705623280076001115089036899
+q : Int = 15787558767041114947254038352533321224956852279667
+n : Int = p * q
+phi : Int = (p - 1) * (q - 1)
+e : ModInt[phi] = 65537
+m : ModInt[n] = b"This DSL is amazing" |> to_int()
+
+c : ModInt[n] = m ** e
+
+print(c |> to_bytes()) # b'\x01\xc3\x05}\xc8\xd6\x95+\xeb.\x98\xb5\xbe\xcdY\xd1\xeb\x80i\xc4\xb1\xcb\xc1\xcfwI\xe0\xe7\xfeV\xd74\xd2v\xc0\xb3m\x90\xbf\xb0\x85\xb0'
+
+d : ModInt[phi] = e ** -1
+
+dec : ModInt[n] = c ** d
+
+print(dec |> to_bytes()) # b'This DSL is amazing'
